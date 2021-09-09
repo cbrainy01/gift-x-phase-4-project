@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+    skip_before_action :authorize, only: :create
+
     def create
         user = User.create!(user_params)
         # render json accordingly with a 201 status code for invalid records will be handled in application controller
