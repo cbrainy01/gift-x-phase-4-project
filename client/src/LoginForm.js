@@ -33,7 +33,7 @@ function LoginForm() {
         })
         .then( response => {
             if(response.ok) {
-                // dispatch action which would sign user in by setting user to whatever was gotten from rData and also clear fields and set errors back to empty array
+                // dispatch action which would sign user in by setting currentUser to whatever was gotten from rData and also clear fields and set errors back to empty array
                 response.json().then( (rData) => {console.log("SET UP DISPATCH WITH THIS DATA: ", rData); setFormData({
                     username: "",
                     password: "",

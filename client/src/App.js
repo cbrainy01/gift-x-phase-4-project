@@ -3,17 +3,17 @@ import Gate from './Gate';
 import './App.css';
 
 function App() {
-  
-  const [user, setUser] = useState(null);
+  // change to currentUser
+  const [currentUser, setCurrentUser] = useState(null);
   
   useEffect(() => {
   
    fetch("/me")
    .then(response => { 
-    // if user is authorized(sign in was successful), then user will be set in state/dispatch action which sets user.
-    // if user is not authorized, see next comment 
+    // if currentUser is authorized(sign in was successful), then currentUser will be set in state/dispatch action which sets currentUser.
+    // if currentUser is not authorized, see next comment 
       if(response.ok) { 
-        response.json().then( (user) => setUser(user) )
+        response.json().then( (currentUser) => setCurrentUser(currentUser) )
       }
     })
  
@@ -21,7 +21,7 @@ function App() {
 
   // if fetch sends back 'unauthorized' message, we render the signup and login page(gate)
   
-  if(user === null) {return <Gate/>}
+  if(currentUser === null) {return <Gate/>}
   
  function handleClick() {
    
@@ -29,14 +29,14 @@ function App() {
      method: 'DELETE',
      headers: {'Content-type': 'application/json'},
    })
-  //  set user to null so we can be redirected to the gate
-  .then(setUser(null))
+  //  set currentUser to null so we can be redirected to the gate
+  .then(setCurrentUser(null))
   //  .then(r => r.json())
   //  .then(  )
 
  }
   
-  console.log(user)
+  console.log(currentUser)
   return (
     <div className="App">
       <button onClick={handleClick}>Logout</button>
