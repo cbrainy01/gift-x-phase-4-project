@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { v4 as uuid } from "uuid";
 
 function LoginForm() {
     
@@ -24,10 +25,30 @@ function LoginForm() {
 
     function handleSubmit(event) {
         event.preventDefault();
-        // create post request to login path
-        // fetch("/login")
+        
+        fetch("/login", {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        })
+        .then( response => {
+            if(response.ok) {
+                // dispatch action which would sign user in by setting user to whatever was gotten from rData and also clear fields and set errors back to empty array
+                response.json().then( (rData) => {console.log("SET UP DISPATCH WITH THIS DATA: ", rData); setFormData({
+                    username: "",
+                    password: "",
+                }); setErrors([])   } )
+            }
+            else {
+                response.json().then( rData => setErrors(rData.errors) )
+            }
+        })
+
     }
-    
+    console.log("ERRORS: ", errors)
+    const renderErrors = errors.map( (error) => <p key={uuid()} style={{color: "red"}}>{error}</p> )
+
+
     return (
         <div>
             <form onSubmit={handleSubmit}>
@@ -36,6 +57,8 @@ function LoginForm() {
                
                 <button>Login</button>
             </form>
+
+            {errors ? renderErrors : <></> }
         </div>
  
  

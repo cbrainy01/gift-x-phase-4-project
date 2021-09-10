@@ -32,7 +32,7 @@ function SignupForm() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
         })
-        // if response is okay, set up dispatch which adds user to table of users
+        // if response is okay, set up dispatch which adds user to table of users, also maybe include signup sucessful message
         // if response isnt okay, set errors
         .then( response => {
             if(response.ok) {

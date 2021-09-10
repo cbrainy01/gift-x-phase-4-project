@@ -23,24 +23,25 @@ function App() {
   
   if(user === null) {return <Gate/>}
   
- 
+ function handleClick() {
+   
+  fetch("/logout", {
+     method: 'DELETE',
+     headers: {'Content-type': 'application/json'},
+   })
+  //  set user to null so we can be redirected to the gate
+  .then(setUser(null))
+  //  .then(r => r.json())
+  //  .then(  )
+
+ }
   
   console.log(user)
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={handleClick}>Logout</button>
+      {/* setup navbar */}
+      {/* setup routes with paths */}
     </div>
   );
 }
