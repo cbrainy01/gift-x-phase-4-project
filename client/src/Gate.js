@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import LoginForm from './LoginForm';
+import SignupForm from './SignupForm'
 
 function Gate() {
     const [showLogin, setShowLogin] = useState(true);
@@ -9,8 +11,8 @@ function Gate() {
             {showLogin ? (
                 <>
                     <LoginForm/>
-                    <p>Dont have an account?</p>
-                    <button onClick={ () => setShowLogin(true) }>Sign up</button>
+                    <p>New to Gift-X?</p>
+                    <button onClick={ () => setShowLogin(false) }>Sign up</button>
                 </>
             ) 
             : 
@@ -18,7 +20,7 @@ function Gate() {
                 <>
                     <SignupForm/>
                     <p>Already have an account?</p>
-                    <button onClick={ () => setShowLogin(false) }>Log in</button>
+                    <button onClick={ () => setShowLogin(true) }>Log in</button>
                 </>
             ) }
         </div>

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Gate from './Gate';
 import './App.css';
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
 
   // if fetch sends back 'unauthorized' message, we render the signup and login page(gate)
   
-  // if(user === null) {return <Gate/>}
+  if(user === null) {return <Gate/>}
   
  
   
