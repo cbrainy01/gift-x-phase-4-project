@@ -8,6 +8,7 @@ function LoginForm() {
     // const [username, setUsername] = useState("")
     // const [password, setPassword] = useState("")
     // const [passwordConfirmation, setPasswordConfirmation] = useState("")
+    const [errors, setErrors] = useState([])
     const [formData, setFormData] = useState({
         // name: "",
         username: "",
@@ -15,6 +16,7 @@ function LoginForm() {
         // passwordConfirmation: "",
     })
 
+    console.log("login form data: ", formData)
 
     function handleChange(event) {
         setFormData({ ...formData, [event.target.name]: event.target.value })
@@ -22,14 +24,15 @@ function LoginForm() {
 
     function handleSubmit(event) {
         event.preventDefault();
-
+        // create post request to login path
+        // fetch("/login")
     }
     
     return (
         <div>
             <form onSubmit={handleSubmit}>
                 <label>Username:</label><input onChange={handleChange} name="username" type="text"></input><br></br>
-                <label>Password:</label><input onChange={handleChange} name="password" type="text"></input><br></br>
+                <label>Password:</label><input onChange={handleChange} name="password" type="password"></input><br></br>
                
                 <button>Login</button>
             </form>
