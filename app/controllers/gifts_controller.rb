@@ -31,7 +31,7 @@ class GiftsController < ApplicationController
     private
 
     def gift_params
-        params.permit(:name, :date, :rating, :fulfilled, :incoming)
+        params.permit(:name, :date, :rating, :fulfilled, :incoming, :user_id, :person_id)
     end
 
 end

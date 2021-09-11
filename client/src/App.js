@@ -37,9 +37,13 @@ function App() {
   .then(setCurrentUser(null))
  }
   
+ const renderGifts = currentUser.gifts.map( (gift) => <p>{gift.name}</p> )
+
   return (
     <div className="App">
       <h1>Welcome to Gift-X {currentUser.name}</h1>
+      <h3>Gifts</h3>
+      {renderGifts}
       <button onClick={handleLogout}>Logout</button>
       {/* <Navigation/> */}
       {/* setup navbar */}
