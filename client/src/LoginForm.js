@@ -3,21 +3,13 @@ import { v4 as uuid } from "uuid";
 import { CurrentUserContext } from "./context/currentUser"
 
 
-function LoginForm({onLogin}) {
+function LoginForm() {
     
-    // dispatch would either cause a new user to be created and return the user or return errors
-
-    // const [name, setName] = useState("")
-    // const [username, setUsername] = useState("")
-    // const [password, setPassword] = useState("")
-    // const [passwordConfirmation, setPasswordConfirmation] = useState("")
     const [currentUser, setCurrentUser] = useContext(CurrentUserContext)
     const [errors, setErrors] = useState([])
     const [formData, setFormData] = useState({
-        // name: "",
         username: "",
         password: "",
-        // passwordConfirmation: "",
     })
 
     console.log("login form data: ", formData)

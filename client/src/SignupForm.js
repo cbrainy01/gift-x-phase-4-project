@@ -42,12 +42,7 @@ function SignupForm() {
                 console.log("dispatch")
                 response.json()
                 .then( (rData) => setCurrentUser(rData.user) )
-                // .then( (rData) => {console.log("SET UP DISPATCH WITH THIS DATA: ", rData); setFormData({
-                //     name: "",
-                //     username: "",
-                //     password: "",
-                //     password_confirmation: "",
-                // }); setErrors([])   } )
+               
             } else {
                 response.json().then( (rData) => { setErrors(rData.errors);     } )
             }

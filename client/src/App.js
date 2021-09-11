@@ -2,9 +2,10 @@ import { useState, useEffect, useContext } from 'react';
 import Gate from './Gate';
 import './App.css';
 import { CurrentUserContext } from "./context/currentUser"
+import Navigation from "./Navigation"
 
 function App() {
-  // change to currentUser
+
   const [currentUser, setCurrentUser] = useContext(CurrentUserContext);
   
   console.log("current user is: ", currentUser)
@@ -25,10 +26,6 @@ function App() {
   // if fetch sends back 'unauthorized' message, we render the signup and login page(gate)
   
   if(currentUser === null) {return <Gate />}
-  
-  // function handleLogin(userInfo) {
-  //   setCurrentUser(userInfo)
-  // }  
 
  function handleLogout() {
    
@@ -44,6 +41,7 @@ function App() {
     <div className="App">
       <h1>Welcome to Gift-X {currentUser.name}</h1>
       <button onClick={handleLogout}>Logout</button>
+      {/* <Navigation/> */}
       {/* setup navbar */}
       {/* setup routes with paths */}
     </div>
