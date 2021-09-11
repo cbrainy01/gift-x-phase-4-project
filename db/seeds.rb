@@ -11,4 +11,7 @@ user3 = User.create(username: "tim", password: "apple", password_confirmation: "
 
 socks = Gift.create(name: "socks", date: '2021-06-15', rating: 4, fulfilled: true, incoming: true)
 guitar = Gift.create(name: "guitar", date: '2021-11-23', rating: 8, fulfilled: false, incoming: false)
+
+adam = Person.create(name: "adam", info: "Loves photography. Favorite brand: Nike")
+willy = Person.create(name: "willy", info: "Loves swimming. Favorite brand: Adidas")
 # puts valid_date?('2015-11-30')
