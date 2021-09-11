@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { v4 as uuid } from "uuid";
+import { CurrentUserContext } from "./context/currentUser"
 
 function SignupForm() {
    
@@ -10,6 +11,8 @@ function SignupForm() {
     // const [password, setPassword] = useState("")
     // const [passwordConfirmation, setPasswordConfirmation] = useState("")
     const [errors, setErrors] = useState([])
+    const [currentUser, setCurrentUser] = useContext(CurrentUserContext)
+    
     const [formData, setFormData] = useState({
         name: "",
         username: "",
@@ -32,17 +35,19 @@ function SignupForm() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
         })
-        // if response is okay, set up dispatch which adds user to table of users, also maybe include signup sucessful message
+        // if response is okay, set current user to the created user(rData.user)
         // if response isnt okay, set errors
         .then( response => {
             if(response.ok) {
                 console.log("dispatch")
-                response.json().then( (rData) => {console.log("SET UP DISPATCH WITH THIS DATA: ", rData); setFormData({
-                    name: "",
-                    username: "",
-                    password: "",
-                    password_confirmation: "",
-                }); setErrors([])   } )
+                response.json()
+                .then( (rData) => setCurrentUser(rData.user) )
+                // .then( (rData) => {console.log("SET UP DISPATCH WITH THIS DATA: ", rData); setFormData({
+                //     name: "",
+                //     username: "",
+                //     password: "",
+                //     password_confirmation: "",
+                // }); setErrors([])   } )
             } else {
                 response.json().then( (rData) => { setErrors(rData.errors);     } )
             }
