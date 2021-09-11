@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { v4 as uuid } from "uuid";
+import { CurrentUserContext } from "./context/currentUser"
 
-function LoginForm() {
+
+function LoginForm({onLogin}) {
     
     // dispatch would either cause a new user to be created and return the user or return errors
 
@@ -9,6 +11,7 @@ function LoginForm() {
     // const [username, setUsername] = useState("")
     // const [password, setPassword] = useState("")
     // const [passwordConfirmation, setPasswordConfirmation] = useState("")
+    const [currentUser, setCurrentUser] = useContext(CurrentUserContext)
     const [errors, setErrors] = useState([])
     const [formData, setFormData] = useState({
         // name: "",
@@ -33,14 +36,14 @@ function LoginForm() {
         })
         .then( response => {
             if(response.ok) {
-                // dispatch action which would sign user in by setting currentUser to whatever was gotten from rData and also clear fields and set errors back to empty array
-                response.json().then( (rData) => {console.log("SET UP DISPATCH WITH THIS DATA: ", rData); setFormData({
+                // set current user to what came from fetch(authenticated user) and set errors back to empty array
+                response.json().then( (rData) => {setFormData({
                     username: "",
                     password: "",
-                }); setErrors([])   } )
+                }); setErrors([]);    setCurrentUser(rData)} )
             }
             else {
-                response.json().then( rData => setErrors(rData.errors) )
+                response.json().then( rData => setErrors(rData.errors)  )
             }
         })
 
@@ -52,8 +55,8 @@ function LoginForm() {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <label>Username:</label><input onChange={handleChange} name="username" type="text"></input><br></br>
-                <label>Password:</label><input onChange={handleChange} name="password" type="password"></input><br></br>
+                <label>Username:</label><input onChange={handleChange} name="username" type="text" value={formData.username} ></input><br></br>
+                <label>Password:</label><input onChange={handleChange} name="password" type="password" value={formData.password} ></input><br></br>
                
                 <button>Login</button>
             </form>

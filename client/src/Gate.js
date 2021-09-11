@@ -10,7 +10,7 @@ function Gate() {
         <div>
             {showLogin ? (
                 <>
-                    <LoginForm/>
+                    <LoginForm />
                     <p>New to Gift-X?</p>
                     <button onClick={ () => setShowLogin(false) }>Sign up</button>
                 </>

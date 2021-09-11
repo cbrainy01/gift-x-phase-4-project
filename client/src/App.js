@@ -1,11 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Gate from './Gate';
 import './App.css';
+import { CurrentUserContext } from "./context/currentUser"
 
 function App() {
   // change to currentUser
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useContext(CurrentUserContext);
   
+  console.log("current user is: ", currentUser)
+
   useEffect(() => {
   
    fetch("/me")
@@ -21,9 +24,13 @@ function App() {
 
   // if fetch sends back 'unauthorized' message, we render the signup and login page(gate)
   
-  if(currentUser === null) {return <Gate/>}
+  if(currentUser === null) {return <Gate />}
   
- function handleClick() {
+  // function handleLogin(userInfo) {
+  //   setCurrentUser(userInfo)
+  // }  
+
+ function handleLogout() {
    
   fetch("/logout", {
      method: 'DELETE',
@@ -31,15 +38,12 @@ function App() {
    })
   //  set currentUser to null so we can be redirected to the gate
   .then(setCurrentUser(null))
-  //  .then(r => r.json())
-  //  .then(  )
-
  }
   
-  console.log(currentUser)
   return (
     <div className="App">
-      <button onClick={handleClick}>Logout</button>
+      <h1>Welcome to Gift-X {currentUser.name}</h1>
+      <button onClick={handleLogout}>Logout</button>
       {/* setup navbar */}
       {/* setup routes with paths */}
     </div>
@@ -47,3 +51,5 @@ function App() {
 }
 
 export default App;
+
+

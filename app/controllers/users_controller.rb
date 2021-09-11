@@ -9,6 +9,7 @@ class UsersController < ApplicationController
     end
 
     def show
+        # change to current_user
         user = User.find_by(id: session[:user_id])
 
         render json: user
