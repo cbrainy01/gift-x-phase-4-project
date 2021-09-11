@@ -8,3 +8,7 @@
 user1 = User.create(username: "mike", password: "apple", password_confirmation: "apple", name: "Michael Scott")
 user2 = User.create(username: "sam", password: "apple", password_confirmation: "apple", name: "Samuel Jackson")
 user3 = User.create(username: "tim", password: "apple", password_confirmation: "apple", name: "Timothey Smith")
+
+socks = Gift.create(name: "socks", date: '2021-06-15', rating: 4, fulfilled: true, incoming: true)
+guitar = Gift.create(name: "guitar", date: '2021-11-23', rating: 8, fulfilled: false, incoming: false)
+# puts valid_date?('2015-11-30')
