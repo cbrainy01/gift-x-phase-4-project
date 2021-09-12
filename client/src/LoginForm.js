@@ -32,7 +32,7 @@ function LoginForm({onLogin}) {
                 response.json().then( (rData) => {/**setFormData({
                     username: "",
                     password: "",
-                }); setErrors([]);*/    onLogin(rData)} )
+                }); setErrors([]);*/    onLogin(rData, rData.gifts, rData.people)} )
             }
             else {
                 response.json().then( rData => setErrors(rData.errors)  )

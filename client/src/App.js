@@ -11,8 +11,8 @@ function App() {
 
   // const [currentUser, setCurrentUser] = useContext(CurrentUserContext);
   const [currentUser, setCurrentUser] = useState(null)
-  // const [userGifts, setUserGifts] = useState([])
-  // const [userPeople, setUserPeople] = useState([])
+  const [userGifts, setUserGifts] = useState([])
+  const [userPeople, setUserPeople] = useState([])
 
   console.log("current user is: ", currentUser)
 
@@ -33,9 +33,10 @@ function App() {
   
   if(currentUser === null) {return <Gate onLogin={handleLogin} />}
 
-  function handleLogin(user) {
+  function handleLogin(user, gifts, people) {
     setCurrentUser(user)
-
+    setUserGifts(gifts)
+    setUserPeople(people)
   }
 
  function handleLogout() {
@@ -43,8 +44,8 @@ function App() {
   (setCurrentUser(null))
  }
 
-  // console.log("USER GIFTS: ", userGifts)
-  // console.log("USER People: ", userPeople)
+  console.log("USER GIFTS: ", userGifts)
+  console.log("USER People: ", userPeople)
 //  const renderGifts = currentUser.gifts.map( (gift) => <p key={uuid()}>{gift.name}</p> )
 
   return (
