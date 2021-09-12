@@ -13,12 +13,15 @@ function Navbar({ currentUser, onLogout }) {
 
     return (
         <div>
-            <h1>
+            <h3>
                 <Link to="/">Gift-X</Link>
-            </h1>
-            <h1>
+            </h3>
+            <h3>
                 <Link to="/gifts"> The Gifts</Link>
-            </h1>
+            </h3>
+            <h3>
+                <Link to="/people"> People</Link>
+            </h3>
             <>
                     <p>Welcome to Gift-X {currentUser.username}</p>
                     <button onClick={handleLogout}>Logout</button>

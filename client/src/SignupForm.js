@@ -11,6 +11,7 @@ function SignupForm({onLogin}) {
     // const [password, setPassword] = useState("")
     // const [passwordConfirmation, setPasswordConfirmation] = useState("")
     const [errors, setErrors] = useState([])
+    const [successfulMessage, setSuccessfulMessage] = useState("")
     // const [currentUser, setCurrentUser] = useContext(CurrentUserContext)
     
     const [formData, setFormData] = useState({
@@ -39,9 +40,13 @@ function SignupForm({onLogin}) {
         // if response isnt okay, set errors
         .then( response => {
             if(response.ok) {
-                console.log("dispatch")
                 response.json()
-                .then( (rData) => onLogin(rData.user) )
+                .then( (rData) => {setSuccessfulMessage("Sign-up successful"); setFormData({
+                    name: "",
+                    username: "",
+                    password: "",
+                    password_confirmation: "",
+                })}/*onLogin(rData.user)*/ )
                
             } else {
                 response.json().then( (rData) => { setErrors(rData.errors);     } )
@@ -64,7 +69,7 @@ function SignupForm({onLogin}) {
                 
                <button>Sign up</button>
             </form>
-            
+            {successfulMessage ? <p>{successfulMessage}</p> : <></>}
             {errors ? renderErrors : <></> }
         </div>
  
