@@ -42,8 +42,12 @@ function App() {
   }
 
  function handleLogout() {
-   
   (setCurrentUser(null))
+ }
+
+ function handleNewPerson(newPersonInfo) {
+  fetch("/people", {})
+  .then( r => r.json() )
  }
 
   console.log("USER GIFTS: ", userGifts)
