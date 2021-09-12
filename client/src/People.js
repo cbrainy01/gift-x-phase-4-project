@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { v4 as uuid } from "uuid"
+import Person from './Person'
 
 function People({currentUser, people, onAddPerson}) {
     
@@ -19,12 +20,7 @@ function People({currentUser, people, onAddPerson}) {
         onAddPerson(formData)
     }
 
-    const renderPeople = people.map( (person) => (
-        <div key={uuid()}>
-            <p>{person.name}</p>
-            <p>{person.info}</p>
-        </div>
-    ) )
+    const renderPeople = people.map( (person) => <Person key={uuid()} person={person} currentUser={currentUser}/> )
     
     console.log("NEW PERSON IFO: ", formData)
     return (
