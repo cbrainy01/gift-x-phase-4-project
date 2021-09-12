@@ -6,6 +6,8 @@ import { v4 as uuid } from "uuid"
 import Gate from './Gate';
 import Home from './Home';
 import Navbar from './Navbar';
+import Gifts from './Gifts';
+import People from './People';
 
 function App() {
 
@@ -22,7 +24,7 @@ function App() {
     // if currentUser is authorized(sign in was successful), then currentUser will be set in state/dispatch action which sets currentUser.
     // if currentUser is not authorized, see next comment 
       if(response.ok) { 
-        response.json().then( (currentUser) => {setCurrentUser(currentUser); /*setUserGifts(currentUser.gifts); setUserPeople(currentUser.people)*/} )
+        response.json().then( (currentUser) => {setCurrentUser(currentUser); setUserGifts(currentUser.gifts); setUserPeople(currentUser.people)} )
       }
     })
   
@@ -53,10 +55,10 @@ function App() {
       <Navbar currentUser={currentUser} onLogout={handleLogout}/>
       <Switch>
         <Route exact path="/gifts">
-          {/* GIFTS COMPONENT */}
+          <Gifts gifts={userGifts}/>
         </Route>
         <Route exact path="/people">
-          {/* PEOPLE COMPONENT */}
+          <People people={userPeople}/>
         </Route>
         <Route exact path="/gate">
           <Gate onLogin={handleLogin}/>
