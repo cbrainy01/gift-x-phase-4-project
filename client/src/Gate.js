@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm'
 
-function Gate() {
+function Gate({onLogin}) {
     const [showLogin, setShowLogin] = useState(true);
     // import user variable
 
@@ -10,7 +10,7 @@ function Gate() {
         <div>
             {showLogin ? (
                 <>
-                    <LoginForm />
+                    <LoginForm onLogin={onLogin} />
                     <p>New to Gift-X?</p>
                     <button onClick={ () => setShowLogin(false) }>Sign up</button>
                 </>

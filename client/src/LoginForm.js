@@ -3,9 +3,9 @@ import { v4 as uuid } from "uuid";
 import { CurrentUserContext } from "./context/currentUser"
 
 
-function LoginForm() {
+function LoginForm({onLogin}) {
     
-    const [currentUser, setCurrentUser] = useContext(CurrentUserContext)
+    // const [currentUser, setCurrentUser] = useContext(CurrentUserContext)
     const [errors, setErrors] = useState([])
     const [formData, setFormData] = useState({
         username: "",
@@ -32,7 +32,7 @@ function LoginForm() {
                 response.json().then( (rData) => {setFormData({
                     username: "",
                     password: "",
-                }); setErrors([]);    setCurrentUser(rData)} )
+                }); setErrors([]);    onLogin(rData)/*setCurrentUser(rData)*/} )
             }
             else {
                 response.json().then( rData => setErrors(rData.errors)  )

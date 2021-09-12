@@ -1,9 +1,11 @@
 import React from 'react'
-import { Navbar, Nav, Container } from 'react-bootstrap';
+// import { Navbar, Nav, Container } from 'react-bootstrap';
+import {Navbar, Nav, Container, NavDropdown} from 'react-bootstrap'
 
 function Navigation() {
     return (
         <div>
+          <p>---------------------------------------------------NAVBAR--------------------------------------------</p>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
             <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>

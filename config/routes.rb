@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
 
   resources :gifts
+  resources :people
   
   # post "/signup", to: "users#create"
 end
