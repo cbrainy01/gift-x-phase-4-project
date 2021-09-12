@@ -29,10 +29,10 @@ function LoginForm({onLogin}) {
         .then( response => {
             if(response.ok) {
                 // set current user to what came from fetch(authenticated user) and set errors back to empty array
-                response.json().then( (rData) => {setFormData({
+                response.json().then( (rData) => {/**setFormData({
                     username: "",
                     password: "",
-                }); setErrors([]);    onLogin(rData)/*setCurrentUser(rData)*/} )
+                }); setErrors([]);*/    onLogin(rData)} )
             }
             else {
                 response.json().then( rData => setErrors(rData.errors)  )

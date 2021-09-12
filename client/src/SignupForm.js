@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react'
 import { v4 as uuid } from "uuid";
-import { CurrentUserContext } from "./context/currentUser"
+// import { CurrentUserContext } from "./context/currentUser"
 
-function SignupForm() {
+function SignupForm({onLogin}) {
    
     // dispatch would either cause a new user to be created and return the user or return errors
 
@@ -11,7 +11,7 @@ function SignupForm() {
     // const [password, setPassword] = useState("")
     // const [passwordConfirmation, setPasswordConfirmation] = useState("")
     const [errors, setErrors] = useState([])
-    const [currentUser, setCurrentUser] = useContext(CurrentUserContext)
+    // const [currentUser, setCurrentUser] = useContext(CurrentUserContext)
     
     const [formData, setFormData] = useState({
         name: "",
@@ -41,7 +41,7 @@ function SignupForm() {
             if(response.ok) {
                 console.log("dispatch")
                 response.json()
-                .then( (rData) => setCurrentUser(rData.user) )
+                .then( (rData) => onLogin(rData.user) )
                
             } else {
                 response.json().then( (rData) => { setErrors(rData.errors);     } )

@@ -3,16 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { BrowserRouter as Router } from "react-router-dom";
-import { CurrentUserProvider } from "./context/currentUser"
-import "bootstrap/dist/css/bootstrap.min.css"
+// import { CurrentUserProvider } from "./context/currentUser"
+// import "bootstrap/dist/css/bootstrap.min.css"
 
 
 ReactDOM.render(
     <Router>
-    {/* <CurrentUserProvider> */}
+     {/* <CurrentUserProvider> */}
       <App />
-    {/* </CurrentUserProvider> */}
-    </Router>
+     {/* </CurrentUserProvider> */}
+     </Router>
  , document.getElementById('root')
 );
 {/* </BrowserRouter> */}
