@@ -1,6 +1,6 @@
 class PersonSerializer < ActiveModel::Serializer
   has_many :gifts 
-  has_one :user, through: :gifts
+  belongs_to :user
   
-  attributes :id, :name, :image, :info, :gifts
+  attributes :id, :name, :image, :info, :gifts, :user
 end

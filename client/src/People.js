@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { v4 as uuid } from "uuid"
 
-function People({people}) {
+function People({currentUser, people, onAddPerson}) {
     
     const [formData, setFormData] = useState({
+        user_id: currentUser.id,
         name: "",
         image: "",
         info: "",
@@ -11,6 +12,11 @@ function People({people}) {
 
     function handleChange(event) {
         setFormData({ ...formData, [event.target.name]: event.target.value })
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        onAddPerson(formData)
     }
 
     const renderPeople = people.map( (person) => (
@@ -24,7 +30,7 @@ function People({people}) {
     return (
         <div>
             <h1>People</h1>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label>Person name: </label>
                 <input onChange={handleChange} id="name" name="name" type="text" value={formData.name}></input><br></br>
                 <label>Person image_url: </label>

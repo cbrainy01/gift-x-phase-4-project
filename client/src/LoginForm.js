@@ -1,7 +1,5 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { v4 as uuid } from "uuid";
-import { CurrentUserContext } from "./context/currentUser"
-
 
 function LoginForm({onLogin}) {
     

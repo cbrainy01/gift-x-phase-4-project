@@ -45,9 +45,14 @@ function App() {
   (setCurrentUser(null))
  }
 
- function handleNewPerson(newPersonInfo) {
-  fetch("/people", {})
+ function handleAddPerson(newPersonInfo) {
+  fetch("/people", {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(newPersonInfo)
+  })
   .then( r => r.json() )
+  .then( (rData) => console.log("NEW PERSON: ", rData) )
  }
 
   console.log("USER GIFTS: ", userGifts)
@@ -62,7 +67,7 @@ function App() {
           <Gifts gifts={userGifts}/>
         </Route>
         <Route exact path="/people">
-          <People people={userPeople}/>
+          <People currentUser={currentUser} people={userPeople} onAddPerson={handleAddPerson}/>
         </Route>
         <Route exact path="/gate">
           <Gate onLogin={handleLogin}/>

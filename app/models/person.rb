@@ -1,6 +1,7 @@
 class Person < ApplicationRecord
     has_many :gifts 
-    has_one :user, through: :gifts 
+    belongs_to :user 
+    
     
     validates :name, presence: true, length: {maximum: 50}
     validates :info, length: {maximum: 750}
