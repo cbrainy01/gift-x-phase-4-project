@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { v4 as uuid } from "uuid"
 import Person from './Person'
 
-function People({currentUser, people, onAddPerson}) {
+function People({currentUser, people, onAddPerson, onPersonEdit}) {
     
     const [formData, setFormData] = useState({
         user_id: currentUser.id,
@@ -26,7 +26,7 @@ function People({currentUser, people, onAddPerson}) {
         })
     }
 
-    const renderPeople = people.map( (person) => <Person key={uuid()} person={person} currentUser={currentUser}/> )
+    const renderPeople = people.map( (person) => <Person key={uuid()} person={person} currentUser={currentUser} onPersonEdit={onPersonEdit}/> )
     
     console.log("NEW PERSON IFO: ", formData)
     return (

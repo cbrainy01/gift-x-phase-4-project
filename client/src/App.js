@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 // import { CurrentUserContext } from "./context/currentUser"
 // import Navbar from "./navbar/Navbar"
 import { Route, Switch } from 'react-router-dom';
-import { v4 as uuid } from "uuid"
 import Gate from './Gate';
 import Home from './Home';
 import Navbar from './Navbar';
@@ -15,6 +14,9 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null)
   const [userGifts, setUserGifts] = useState([])
   const [userPeople, setUserPeople] = useState([])
+  // const [peopleEditing, setPeopleEditing] = useState(null)
+  // const [peopleEditFormData, setPeopleEditFormData] = useState("")
+
 
   console.log("current user is: ", currentUser)
 
@@ -55,6 +57,25 @@ function App() {
   .then( (rData) => setUserPeople([...userPeople, rData]) )
  }
 
+ function handlePersonEdit(updateData, updateId) {
+  fetch(`/people/${updateId}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(updateData)
+  })
+  .then(r => r.json() )
+  .then( (rData) => {
+     const updatedPeople = currentUser.people.map( (person) => {
+    if(person.id === updateId) { return rData}
+    else {return person}
+    } )
+    console.log("UPDATED PEOPLE: ", updatedPeople)
+    setUserPeople(updatedPeople)
+  } )
+  // update the person in state. map over user
+ 
+ }
+
   console.log("USER GIFTS: ", userGifts)
   console.log("USER People: ", userPeople)
 //  const renderGifts = currentUser.gifts.map( (gift) => <p key={uuid()}>{gift.name}</p> )
@@ -67,7 +88,7 @@ function App() {
           <Gifts gifts={userGifts}/>
         </Route>
         <Route exact path="/people">
-          <People currentUser={currentUser} people={userPeople} onAddPerson={handleAddPerson}/>
+          <People currentUser={currentUser} people={userPeople} onAddPerson={handleAddPerson} onPersonEdit={handlePersonEdit}/>
         </Route>
         <Route exact path="/gate">
           <Gate onLogin={handleLogin}/>
