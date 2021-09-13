@@ -72,20 +72,35 @@ function App() {
     console.log("UPDATED PEOPLE: ", updatedPeople)
     setUserPeople(updatedPeople)
   } )
-  // update the person in state. map over user
- 
+ }
+
+ function handleCreateGift(newGiftInfo) {
+  fetch("/gifts", {
+    method: "POST",
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(newGiftInfo)
+  })
+  .then( r => r.json() )
+  .then( (rData) => {
+    setUserGifts([...userGifts, rData])
+    const updatedPeople = userPeople.map( (person) => {
+      if(person.id === rData.person_id) { person.gifts = [...person.gifts, rData]; return person }
+      else {return person}
+    } )
+    setUserPeople(updatedPeople)
+  } )
+
  }
 
   console.log("USER GIFTS: ", userGifts)
   console.log("USER People: ", userPeople)
-//  const renderGifts = currentUser.gifts.map( (gift) => <p key={uuid()}>{gift.name}</p> )
 
   return (
     <>
       <Navbar currentUser={currentUser} onLogout={handleLogout}/>
       <Switch>
         <Route exact path="/gifts">
-          <Gifts gifts={userGifts}/>
+          <Gifts gifts={userGifts} people={userPeople} userId={currentUser.id} onGiftCreate={handleCreateGift}/>
         </Route>
         <Route exact path="/people">
           <People currentUser={currentUser} people={userPeople} onAddPerson={handleAddPerson} onPersonEdit={handlePersonEdit}/>
