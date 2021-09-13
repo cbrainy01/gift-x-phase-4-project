@@ -74,6 +74,16 @@ function App() {
   } )
  }
 
+ function handleGiftEdit(updateData, updateId) {
+  fetch(`/gifts/${updateId}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(updateData)
+  })
+  .then(r => r.json() )
+  .then( (rData) => console.log("UPDATED GIFT: ", rData) )
+ }
+
  function handleCreateGift(newGiftInfo) {
   fetch("/gifts", {
     method: "POST",
