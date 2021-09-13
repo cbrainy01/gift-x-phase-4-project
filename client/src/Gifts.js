@@ -20,10 +20,12 @@ function Gifts({gifts, people, userId, onGiftCreate}) {
     function handleCheckboxChange(event) {
         // console.log("fulfilled value: ", event.target.value)
         // let newVal = event.target.value
-        
+    //      if(formData.incoming === "true") {
+    //     formData.fulfilled = true
+    //      }
         setFormData({ ...formData, [event.target.name]: event.target.value === "false" ? true : false  })
     }
-
+   
     function handleSubmit(e) {
         e.preventDefault()
         onGiftCreate(formData)
@@ -45,7 +47,7 @@ function Gifts({gifts, people, userId, onGiftCreate}) {
         return renderOptions;
     }
 
-    const renderGifts = gifts.map( (gift) => <GiftItem key={uuid()} gift={gift}/> )
+    const renderGifts = gifts.map( (gift) => <GiftItem key={uuid()} gift={gift} /> )
     console.log("GIFT FORM DATA: ", formData)
     return (
         <div>
