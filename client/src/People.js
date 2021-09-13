@@ -18,6 +18,12 @@ function People({currentUser, people, onAddPerson}) {
     function handleSubmit(e) {
         e.preventDefault()
         onAddPerson(formData)
+        setFormData({
+            user_id: currentUser.id,
+            name: "",
+            image: "",
+            info: "",
+        })
     }
 
     const renderPeople = people.map( (person) => <Person key={uuid()} person={person} currentUser={currentUser}/> )

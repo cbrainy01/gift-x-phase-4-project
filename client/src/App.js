@@ -24,7 +24,7 @@ function App() {
     // if currentUser is authorized(sign in was successful), then currentUser will be set in state/dispatch action which sets currentUser.
     // if currentUser is not authorized, see next comment 
       if(response.ok) { 
-        response.json().then( (currentUser) => {setCurrentUser(currentUser); setUserGifts(currentUser.gifts); setUserPeople(currentUser.people)} )
+        response.json().then( (currentUser) => {setCurrentUser(currentUser); setUserGifts(currentUser.gifts); setUserPeople(currentUser.people) } )
       }
     })
   
@@ -52,7 +52,7 @@ function App() {
     body: JSON.stringify(newPersonInfo)
   })
   .then( r => r.json() )
-  .then( (rData) => console.log("NEW PERSON: ", rData) )
+  .then( (rData) => setUserPeople([...userPeople, rData]) )
  }
 
   console.log("USER GIFTS: ", userGifts)
