@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { v4 as uuid } from "uuid"
 
 
-function Person({person, currentUser, onPersonEdit}) {
+function Person({person, currentUser, onPersonEdit, onPersonDelete}) {
     
     const [personEditing, setPersonEditing] = useState(null)
     const [personEditFormData, setPersonEditFormData] = useState({
@@ -19,6 +19,10 @@ function Person({person, currentUser, onPersonEdit}) {
         event.preventDefault()
         onPersonEdit(personEditFormData, person.id)
         setPersonEditing(null)
+    }
+
+    function handleClickDelete() {
+        onPersonDelete(person.id)
     }
 
     const giftsUserGaveOut = person.gifts.filter( (gift) => gift.incoming === true )
@@ -59,7 +63,7 @@ function Person({person, currentUser, onPersonEdit}) {
                 {personEditing !== null ? (<button onClick={handleClick}>Submit edit</button> ) : (<button onClick={ () => setPersonEditing(person.id) }>Edit person info</button> )}
                  
                 
-                <button>Delete person</button>
+                <button onClick={handleClickDelete}>Delete person</button>
                  
         </div>
     )

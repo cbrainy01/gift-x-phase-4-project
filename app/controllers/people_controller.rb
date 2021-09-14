@@ -23,7 +23,7 @@ class PeopleController < ApplicationController
 
     def destroy
         person = Person.find(params[:id])
-        gift.destroy
+        person.destroy
         render json: { message: "sucessfully deletd" }
         # head :no_content 
     end

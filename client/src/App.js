@@ -132,7 +132,7 @@ function App() {
      setUserGifts(updatedGifts)
     //  go to user people and for remove that gift from ther persons gift array
     // first, find person gift is associated with
-    // then filter that persons gift array
+    // then filter that persons gift array and set persons gifts to that filtered version, then return the person
     const updatedPeople = userPeople.map( (person) => {
       if(person.id === personId){
         person.gifts = person.gifts.filter( (gift) => gift.id !== deleteId )
@@ -142,7 +142,23 @@ function App() {
     } ) 
     setUserPeople(updatedPeople)
    })
-   
+
+ }
+
+ function handlePersonDelete(personId) {
+  // delete person from userPeople via a filter
+  // go to userGifts and delete any gifts which have a person id which matches the deleted person
+  fetch(`/people/${personId}`, {
+    method: 'DELETE',
+    headers: {'Content-type': 'application/json;'},
+  })
+  .then( () => {
+    const updatedPeople = userPeople.filter( (person) => person.id !== personId )
+    setUserPeople(updatedPeople)
+    const updatedGifts = userGifts.filter( (gift) => gift.person_id !== personId )
+    setUserGifts(updatedGifts)
+
+  } )
  }
 
   console.log("USER GIFTS: ", userGifts)
@@ -156,7 +172,7 @@ function App() {
           <Gifts gifts={userGifts} people={userPeople} userId={currentUser.id} onGiftCreate={handleCreateGift} onGiftEdit={handleGiftEdit} onGiftDelete={handleGiftDelete}/>
         </Route>
         <Route exact path="/people">
-          <People currentUser={currentUser} people={userPeople} onAddPerson={handleAddPerson} onPersonEdit={handlePersonEdit}/>
+          <People currentUser={currentUser} people={userPeople} onAddPerson={handleAddPerson} onPersonEdit={handlePersonEdit} onPersonDelete={handlePersonDelete} />
         </Route>
         <Route exact path="/gate">
           <Gate onLogin={handleLogin}/>
