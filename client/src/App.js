@@ -122,6 +122,29 @@ function App() {
 
  }
 
+ function handleGiftDelete(deleteId, personId) {
+   fetch(`/gifts/${deleteId}`, {
+     method: 'DELETE',
+     headers: {'Content-type': 'application/json;'},
+   })
+   .then( () => {
+     const updatedGifts = userGifts.filter( (gift) => gift.id !== deleteId )
+     setUserGifts(updatedGifts)
+    //  go to user people and for remove that gift from ther persons gift array
+    // first, find person gift is associated with
+    // then filter that persons gift array
+    const updatedPeople = userPeople.map( (person) => {
+      if(person.id === personId){
+        person.gifts = person.gifts.filter( (gift) => gift.id !== deleteId )
+        return person
+      }
+      else {return person}
+    } ) 
+    setUserPeople(updatedPeople)
+   })
+   
+ }
+
   console.log("USER GIFTS: ", userGifts)
   console.log("USER People: ", userPeople)
 
@@ -130,7 +153,7 @@ function App() {
       <Navbar currentUser={currentUser} onLogout={handleLogout}/>
       <Switch>
         <Route exact path="/gifts">
-          <Gifts gifts={userGifts} people={userPeople} userId={currentUser.id} onGiftCreate={handleCreateGift} onGiftEdit={handleGiftEdit}/>
+          <Gifts gifts={userGifts} people={userPeople} userId={currentUser.id} onGiftCreate={handleCreateGift} onGiftEdit={handleGiftEdit} onGiftDelete={handleGiftDelete}/>
         </Route>
         <Route exact path="/people">
           <People currentUser={currentUser} people={userPeople} onAddPerson={handleAddPerson} onPersonEdit={handlePersonEdit}/>

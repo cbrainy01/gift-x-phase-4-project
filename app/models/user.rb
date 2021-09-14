@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-    has_many :gifts
-    has_many :people
+    has_many :gifts, dependent: :destroy
+    has_many :people, dependent: :destroy
     # has_many :people, through: :gifts 
     
     has_secure_password

@@ -1,5 +1,5 @@
 class Person < ApplicationRecord
-    has_many :gifts 
+    has_many :gifts, dependent: :destroy
     belongs_to :user 
     
     # add uniqueness validation

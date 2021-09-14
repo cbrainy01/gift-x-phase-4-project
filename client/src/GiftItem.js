@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { v4 as uuid } from "uuid"
 
-function GiftItem({gift, onGiftEdit}) {
-    // console.log("Current gift is: ", gift)
+function GiftItem({gift, onGiftEdit, onGiftDelete}) {
+    console.log("Current gift is: ", gift)
+    console.log("person : ", gift.person.name)
+        
 
     const [giftEditing, setGiftEditing] = useState(null)
     const [giftEditFormData, setGiftEditFormData] = useState({
@@ -11,7 +13,7 @@ function GiftItem({gift, onGiftEdit}) {
         date: gift.date,
         fulfilled: gift.fulfilled,
     })
-    console.log("---editformDATA: ", giftEditFormData)
+    // console.log("---editformDATA: ", giftEditFormData)
     function handleChange(event) {
         setGiftEditFormData( {...giftEditFormData, [event.target.name]: event.target.value})
     }
@@ -26,6 +28,10 @@ function GiftItem({gift, onGiftEdit}) {
         setGiftEditing(null)
     }
 
+    function handleClickDelete() {
+        onGiftDelete(gift.id, gift.person_id)
+    }
+
     function renderGift() {
         if(gift.incoming) {return (
             <div>
@@ -38,7 +44,7 @@ function GiftItem({gift, onGiftEdit}) {
         </>)    
         : 
         (<><h3 style={{color: "lightgreen"}} >{gift.name}</h3>
-                <p>Recieved from {gift.person_name} on {gift.date}</p></>)
+                <p>Recieved from {gift.person.name} on {gift.date}</p></>)
         }
                 
             </div>
@@ -58,7 +64,7 @@ function GiftItem({gift, onGiftEdit}) {
                 </>) 
                 :
                 (<><h3 style={{color: "lightgreen"}} >{gift.name}</h3>
-            <p>To: {gift.person_name}</p>
+            <p>To: {gift.person.name}</p>
             <p>Date of exchange: {gift.date}</p>
             <p>{gift.fulfilled? "Gift has been fulfilled": "Gift has not been fulfilled" }</p></>)}
             
@@ -70,9 +76,9 @@ function GiftItem({gift, onGiftEdit}) {
     return (
         <div>
             {renderGift()}
-            
+
             {giftEditing !== null ? (<button onClick={handleClick}>Submit edit</button> ) : (<button onClick={ () => setGiftEditing(gift.id) }>Edit gift info</button> )}
-            <button>delete gift</button>
+            <button onClick={handleClickDelete}>delete gift</button>
         </div>
     )
 }

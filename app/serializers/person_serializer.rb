@@ -3,4 +3,8 @@ class PersonSerializer < ActiveModel::Serializer
   belongs_to :user
   
   attributes :id, :name, :image, :info, :gifts, :user
+
+  # def gifts
+  #   [...self.object.gifts]
+  # end
 end
