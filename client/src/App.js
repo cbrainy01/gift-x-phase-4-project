@@ -81,7 +81,27 @@ function App() {
     body: JSON.stringify(updateData)
   })
   .then(r => r.json() )
-  .then( (rData) => console.log("UPDATED GIFT: ", rData) )
+  .then( (rData) => {
+    const updatedGifts = userGifts.map( (gift) => {
+      if(gift.id === updateId) { return rData}
+      else {return gift}
+    } )
+    console.log("UPDATED GIFT: ", rData)
+    setUserGifts(updatedGifts)
+    const updatedPeople = userPeople.map ( (person) => {
+      if(person.id === rData.person_id) {
+        // if the persons id matches the person id of the gift that was just updated, we want to change the persons gifts
+        // to reflect the changes made.
+      person.gifts = person.gifts.map( (gift) => { if (gift.id === updateId) {return rData} else {return gift} })
+      // if the gifts id matches the id up gift that was just updated, return the updated version of that gift, otherwise,
+      // return the gift for it was not updated. Then after all that, return the person. Its gifts array has been updated
+       return person  
+      }
+      else {return person}
+    })
+    // console.log("updated people test: ", updatedPeople)
+    setUserPeople(updatedPeople)
+  } )
  }
 
  function handleCreateGift(newGiftInfo) {
@@ -110,7 +130,7 @@ function App() {
       <Navbar currentUser={currentUser} onLogout={handleLogout}/>
       <Switch>
         <Route exact path="/gifts">
-          <Gifts gifts={userGifts} people={userPeople} userId={currentUser.id} onGiftCreate={handleCreateGift}/>
+          <Gifts gifts={userGifts} people={userPeople} userId={currentUser.id} onGiftCreate={handleCreateGift} onGiftEdit={handleGiftEdit}/>
         </Route>
         <Route exact path="/people">
           <People currentUser={currentUser} people={userPeople} onAddPerson={handleAddPerson} onPersonEdit={handlePersonEdit}/>
@@ -136,3 +156,4 @@ function App() {
 export default App;
 
 
+        // return person.gifts.map( gift => { if(gift.id === updateId){return rData} else {return gift} } ) }

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { v4 as uuid } from "uuid"
 import GiftItem from './GiftItem'
 
-function Gifts({gifts, people, userId, onGiftCreate}) {
+function Gifts({gifts, people, userId, onGiftCreate, onGiftEdit}) {
     
     const [formData, setFormData] = useState({
         user_id: userId,
@@ -47,7 +47,7 @@ function Gifts({gifts, people, userId, onGiftCreate}) {
         return renderOptions;
     }
 
-    const renderGifts = gifts.map( (gift) => <GiftItem key={uuid()} gift={gift} /> )
+    const renderGifts = gifts.map( (gift) => <GiftItem key={uuid()} gift={gift} onGiftEdit={onGiftEdit} /> )
     console.log("GIFT FORM DATA: ", formData)
     return (
         <div>
