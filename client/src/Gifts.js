@@ -28,6 +28,7 @@ function Gifts({gifts, people, userId, onGiftCreate, onGiftEdit, onGiftDelete}) 
    
     function handleSubmit(e) {
         e.preventDefault()
+        // VALIDATIONS GO HERE IN AN IF STATEMENT
         onGiftCreate(formData)
         setFormData({
             user_id: userId,

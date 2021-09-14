@@ -110,14 +110,17 @@ function App() {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(newGiftInfo)
   })
-  .then( r => r.json() )
+  .then( r => {console.log("---initial response: ", r); return r.json()} )
   .then( (rData) => {
+    console.log("---second response: ", rData)
+    if(rData.errors) { alert( `Unable to add gift due to the following: ${rData.errors.join(". ")}` ) }
+    else {
     setUserGifts([...userGifts, rData])
     const updatedPeople = userPeople.map( (person) => {
       if(person.id === rData.person_id) { person.gifts = [...person.gifts, rData]; return person }
       else {return person}
     } )
-    setUserPeople(updatedPeople)
+    setUserPeople(updatedPeople) }
   } )
 
  }
@@ -181,13 +184,7 @@ function App() {
           <Home/>
         </Route>
       </Switch>
-      
-      {/* <h1>Welcome to Gift-X {currentUser.name}</h1>
-      <h3>Gifts</h3>
-      {renderGifts}
-      <button onClick={handleLogout}>Logout</button> */}
-      
-      
+       
     </>
   );
 }

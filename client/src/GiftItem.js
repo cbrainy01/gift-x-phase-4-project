@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { v4 as uuid } from "uuid"
 
 function GiftItem({gift, onGiftEdit, onGiftDelete}) {
-    console.log("Current gift is: ", gift)
-    console.log("person : ", gift.person.name)
+    // console.log("Current gift is: ", gift)
+    // console.log("person : ", gift.person.name)
         
 
     const [giftEditing, setGiftEditing] = useState(null)

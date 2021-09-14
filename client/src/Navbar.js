@@ -17,24 +17,16 @@ function Navbar({ currentUser, onLogout }) {
                 <Link to="/">Gift-X</Link>
             </h3>
             <h3>
-                <Link to="/gifts"> The Gifts</Link>
+                <Link to="/gifts"> Gifts</Link>
             </h3>
             <h3>
                 <Link to="/people"> People</Link>
             </h3>
             <>
-                    <p>Welcome to Gift-X {currentUser.username}</p>
+                    <p>currently logged in: {currentUser.username}</p>
                     <button onClick={handleLogout}>Logout</button>
             </>
-            {/* {currentUser ? (
-                <>
-                    <p>Welcome to Gift-X {currentUser.username}</p>
-                    <button onClick={handleLogout}>Logout</button>
-                </>
-            ) : 
-            (
-                <Link to="/gate">Login</Link>
-            ) } */}
+         
         </div>
     )
 }
