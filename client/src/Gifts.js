@@ -4,6 +4,8 @@ import GiftItem from './GiftItem'
 
 function Gifts({gifts, people, userId, onGiftCreate, onGiftEdit, onGiftDelete}) {
     
+    const [filter, setFilter] = useState("")
+    const [sort, setSort] = useState("")
     const [formData, setFormData] = useState({
         user_id: userId,
         person_id: "",
@@ -13,6 +15,53 @@ function Gifts({gifts, people, userId, onGiftCreate, onGiftEdit, onGiftDelete}) 
         fulfilled: "",
         incoming: "",
     })
+
+    // create a filtered function then sort based on that filter
+    // itll end up being filteredGifts.handleSort().map
+    // test out filtered first by going to line 74 and replacing gifts with filteredGifts, changing state of filter and seeing if gifts get filtered
+    // const filteredGifts = gifts.filter( (gift) => { 
+    //     if(filter === "incoming only" && gift.incoming === true) {return true}
+    //     else if(filter === "outgoing only" && gift.incoming === false) {return true}
+    //     else {return true} 
+    // })
+
+    function filteredGifts() {
+        if(filter === "incoming only") {
+            return gifts.filter( (gift) => gift.incoming === true )    
+        }
+        else if(filter === "outgoing only") {
+            return gifts.filter( (gift) => gift.incoming === false )  
+        }
+        else return gifts
+    }
+
+    function handleFilter(event) {
+        setFilter(event.target.value)
+    }
+    console.log("current filter is: ", filter)
+    console.log("filtered gifts is: ", filteredGifts)
+
+    function handleSortChange(event) {
+        setSort(event.target.value)
+    }
+    console.log("current sort is: ", sort)
+
+    function handleSort() {
+        
+        switch(sort) {
+
+            case "sort by date Oldest-Newest": ;
+            case "sort by date Newest-Oldest": ;
+            case "sort by rating hilo": ;
+            case "sort by rating lohi": ;
+            case "sort A-Z": ;
+            case "sort Z-A": ;
+
+            // either going to be gifts or filterdGifts
+            default: return gifts
+        }
+        
+    }
 
     function handleChange(event) {
         setFormData({ ...formData, [event.target.name]: event.target.value })
@@ -43,11 +92,29 @@ function Gifts({gifts, people, userId, onGiftCreate, onGiftEdit, onGiftDelete}) 
         return renderOptions;
     }
 
-    const renderGifts = gifts.map( (gift) => <GiftItem key={uuid()} gift={gift} onGiftEdit={onGiftEdit} onGiftDelete={onGiftDelete} /> )
+    const renderGifts = filteredGifts().map( (gift) => <GiftItem key={uuid()} gift={gift} onGiftEdit={onGiftEdit} onGiftDelete={onGiftDelete} /> )
     console.log("GIFT FORM DATA: ", formData)
     return (
         <div>
             <h1>Gifts</h1>
+
+            {/* <label></label><br></br> */}
+            <label> Show all gifts</label>  
+            <input onChange={handleFilter} name="filter" type="radio" value={"all"}></input><br/>
+            <label> Show all recieved gifts</label>  
+            <input onChange={handleFilter} name="filter" type="radio" value={"incoming only"}></input><br/>
+            <label> Show all outgoing gifts</label>  
+            <input onChange={handleFilter} name="filter" type="radio" value={"outgoing only"}></input><br/><br/>
+
+            <select onChange={handleSortChange}>
+                <option value="">sort by</option>
+                <option value="sort by rating hilo">rating(high-low)</option>
+                <option value="sort by rating lohi">rating(low-high)</option>
+                <option value="sort A-Z">name(A-Z)</option>
+                <option value="sort Z-A">name(Z-A)</option>
+            </select>
+
+            <h2>New Gift Entry</h2>
             <form onSubmit={handleSubmit}>
             <label>Gift name: </label>
                 <input onChange={handleChange} id="name" name="name" type="text" value={formData.name}></input><br></br>
@@ -68,7 +135,7 @@ function Gifts({gifts, people, userId, onGiftCreate, onGiftEdit, onGiftDelete}) 
             <label> Outgoing gift</label>
             <input onChange={handleRadioChange} name="incoming" type="radio" value={"false"}></input><br/><br/>
             
-            <label>Person gift is to/from</label>
+            <label>Person gift is going to/coming from</label>
               <select name="person_id" value={formData.person_id} onChange={handleChange}>
                 <option value="">select person</option>
                 {optionDropdown()}

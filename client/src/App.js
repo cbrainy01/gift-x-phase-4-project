@@ -50,7 +50,7 @@ function App() {
   })
   .then( r => r.json() )
   .then( (rData) => { 
-    if(rData.errors) { alert( `Unable to add person due to the following: ${rData.errors.join(". ")}` ) }
+    if(rData.errors) { alert( `Unable to add person due to the following:\n -${rData.errors.join(". -")}` ) }
     else {setUserPeople([...userPeople, rData]) }
 
   } )
@@ -64,7 +64,7 @@ function App() {
   })
   .then(r => r.json() )
   .then( (rData) => {
-    if(rData.errors) { alert( `Unable to edit person info due to the following: ${rData.errors.join(". ")}` ) }
+    if(rData.errors) { alert( `Unable to edit person info due to the following:\n -${rData.errors.join(". -")}` ) }
     else {
     const updatedPeople = currentUser.people.map( (person) => {
     if(person.id === updateId) { return rData}
@@ -83,7 +83,7 @@ function App() {
   })
   .then(r => r.json() )
   .then( (rData) => {
-    if(rData.errors) { alert( `Unable to edit gift info due to the following: ${rData.errors.join(". ")}` ) }
+    if(rData.errors) { alert( `Unable to edit gift info due to the following:\n -${rData.errors.join(".\n- ")}` ) }
     else {
     const updatedGifts = userGifts.map( (gift) => {
       if(gift.id === updateId) { return rData}
@@ -116,7 +116,7 @@ function App() {
   .then( r => {return r.json()} )
   .then( (rData) => {
 
-    if(rData.errors) { alert( `Unable to add gift due to the following: ${rData.errors.join(". ")}` ) }
+    if(rData.errors) { alert( `Unable to add gift due to the following:\n -${rData.errors.join(".\n -")}` ) }
     else {
     setUserGifts([...userGifts, rData])
     const updatedPeople = userPeople.map( (person) => {
