@@ -4,7 +4,4 @@ class PersonSerializer < ActiveModel::Serializer
   
   attributes :id, :name, :image, :info, :gifts, :user
 
-  # def gifts
-  #   [...self.object.gifts]
-  # end
 end

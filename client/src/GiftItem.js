@@ -12,8 +12,10 @@ function GiftItem({gift, onGiftEdit, onGiftDelete}) {
         person_id: gift.person_id,
         date: gift.date,
         fulfilled: gift.fulfilled,
+        incoming: gift.incoming,
+        rating: gift.rating
     })
-    // console.log("---editformDATA: ", giftEditFormData)
+    console.log("---editformDATA: ", giftEditFormData)
     function handleChange(event) {
         setGiftEditFormData( {...giftEditFormData, [event.target.name]: event.target.value})
     }
@@ -39,7 +41,7 @@ function GiftItem({gift, onGiftEdit, onGiftDelete}) {
         (<>
             <label>Gift name: </label>
                 <input onChange={handleChange} name="name" type="text" value={giftEditFormData.name}></input><br></br>
-            <label for="date">Date of exchange/potential date of exchange</label>
+            <label >Date of exchange/potential date of exchange</label>
                 <input onChange={handleChange} type="date" id="date" name="date" value={giftEditFormData.date}></input><br></br>
         </>)    
         : 
@@ -59,7 +61,7 @@ function GiftItem({gift, onGiftEdit, onGiftDelete}) {
                 <input onChange={handleRadioChange} name="fulfilled" type="radio" value={"true"}></input><br></br>
             <label>Unfulfilled</label>
                 <input onChange={handleRadioChange} name="fulfilled" type="radio" value={"false"}></input><br></br>
-            <label for="date">Date of exchange/potential date of exchange</label>
+            <label >Date of exchange/potential date of exchange</label>
                 <input onChange={handleChange} type="date" id="date" name="date" value={giftEditFormData.date}></input><br></br>
                 </>) 
                 :

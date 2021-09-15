@@ -76,6 +76,7 @@ function App() {
  }
 
  function handleGiftEdit(updateData, updateId) {
+   console.log("--updated data: ", updateData)
   fetch(`/gifts/${updateId}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
@@ -83,6 +84,7 @@ function App() {
   })
   .then(r => r.json() )
   .then( (rData) => {
+    console.log("--rData: ", rData)
     if(rData.errors) { alert( `Unable to edit gift info due to the following:\n -${rData.errors.join(".\n- ")}` ) }
     else {
     const updatedGifts = userGifts.map( (gift) => {
