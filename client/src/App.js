@@ -54,7 +54,11 @@ function App() {
     body: JSON.stringify(newPersonInfo)
   })
   .then( r => r.json() )
-  .then( (rData) => setUserPeople([...userPeople, rData]) )
+  .then( (rData) => { 
+    if(rData.errors) { alert( `Unable to add person due to the following: ${rData.errors.join(". ")}` ) }
+    else {setUserPeople([...userPeople, rData]) }
+
+  } )
  }
 
  function handlePersonEdit(updateData, updateId) {
@@ -110,9 +114,9 @@ function App() {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(newGiftInfo)
   })
-  .then( r => {console.log("---initial response: ", r); return r.json()} )
+  .then( r => {return r.json()} )
   .then( (rData) => {
-    console.log("---second response: ", rData)
+    // console.log("---errors from person create: ", rData)
     if(rData.errors) { alert( `Unable to add gift due to the following: ${rData.errors.join(". ")}` ) }
     else {
     setUserGifts([...userGifts, rData])
