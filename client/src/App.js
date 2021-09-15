@@ -10,13 +10,9 @@ import People from './People';
 
 function App() {
 
-  // const [currentUser, setCurrentUser] = useContext(CurrentUserContext);
   const [currentUser, setCurrentUser] = useState(null)
   const [userGifts, setUserGifts] = useState([])
   const [userPeople, setUserPeople] = useState([])
-  // const [peopleEditing, setPeopleEditing] = useState(null)
-  // const [peopleEditFormData, setPeopleEditFormData] = useState("")
-
 
   console.log("current user is: ", currentUser)
 
@@ -30,7 +26,6 @@ function App() {
       }
     })
   
- 
   }, []);
 
   // if fetch sends back 'unauthorized' message, we render the signup and login page(gate)
@@ -69,12 +64,14 @@ function App() {
   })
   .then(r => r.json() )
   .then( (rData) => {
-     const updatedPeople = currentUser.people.map( (person) => {
+    if(rData.errors) { alert( `Unable to edit person info due to the following: ${rData.errors.join(". ")}` ) }
+    else {
+    const updatedPeople = currentUser.people.map( (person) => {
     if(person.id === updateId) { return rData}
     else {return person}
     } )
     console.log("UPDATED PEOPLE: ", updatedPeople)
-    setUserPeople(updatedPeople)
+    setUserPeople(updatedPeople) }
   } )
  }
 
@@ -86,6 +83,8 @@ function App() {
   })
   .then(r => r.json() )
   .then( (rData) => {
+    if(rData.errors) { alert( `Unable to edit gift info due to the following: ${rData.errors.join(". ")}` ) }
+    else {
     const updatedGifts = userGifts.map( (gift) => {
       if(gift.id === updateId) { return rData}
       else {return gift}
@@ -104,7 +103,7 @@ function App() {
       else {return person}
     })
     // console.log("updated people test: ", updatedPeople)
-    setUserPeople(updatedPeople)
+    setUserPeople(updatedPeople) }
   } )
  }
 
@@ -116,7 +115,7 @@ function App() {
   })
   .then( r => {return r.json()} )
   .then( (rData) => {
-    // console.log("---errors from person create: ", rData)
+
     if(rData.errors) { alert( `Unable to add gift due to the following: ${rData.errors.join(". ")}` ) }
     else {
     setUserGifts([...userGifts, rData])
@@ -196,4 +195,3 @@ function App() {
 export default App;
 
 
-        // return person.gifts.map( gift => { if(gift.id === updateId){return rData} else {return gift} } ) }

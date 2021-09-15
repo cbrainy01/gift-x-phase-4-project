@@ -10,25 +10,20 @@ function Gifts({gifts, people, userId, onGiftCreate, onGiftEdit, onGiftDelete}) 
         name: "",
         rating: "",
         date: "",
-        fulfilled: false,
-        incoming: false,
+        fulfilled: "",
+        incoming: "",
     })
 
     function handleChange(event) {
         setFormData({ ...formData, [event.target.name]: event.target.value })
     }
-    function handleCheckboxChange(event) {
-        // console.log("fulfilled value: ", event.target.value)
-        // let newVal = event.target.value
-    //      if(formData.incoming === "true") {
-    //     formData.fulfilled = true
-    //      }
-        setFormData({ ...formData, [event.target.name]: event.target.value === "false" ? true : false  })
-    }
+
+    function handleRadioChange(event) {
+        setFormData({ ...formData, [event.target.name]: event.target.value === "true" ? true : false })
+   }
    
     function handleSubmit(e) {
         e.preventDefault()
-        // VALIDATIONS GO HERE IN AN IF STATEMENT
         onGiftCreate(formData)
         setFormData({
             user_id: userId,
@@ -36,8 +31,8 @@ function Gifts({gifts, people, userId, onGiftCreate, onGiftEdit, onGiftDelete}) 
             name: "",
             rating: "",
             date: "",
-            fulfilled: false,
-            incoming: false,
+            fulfilled: "",
+            incoming: "",
         })
     }
 
@@ -59,13 +54,21 @@ function Gifts({gifts, people, userId, onGiftCreate, onGiftEdit, onGiftDelete}) 
             <label for="rating">Rating (between 0 and 10):</label>
                 <input onChange={handleChange} type="range" id="rating" name="rating" min="0" max="10" value={formData.rating}></input><p>{formData.rating}</p><br></br>
             <label for="date">Date of exchange/potential date of exchange</label>
-                <input onChange={handleChange} type="date" id="date" name="date"></input><br></br> 
-                <input onChange={handleCheckboxChange } type="checkbox" id="fulfilled" name="fulfilled" value={formData.fulfilled}></input>
-            <label for="fulfilled"> Fulfilled</label><br></br>  
-                <input onChange={handleCheckboxChange } type="checkbox" id="incoming" name="incoming" value={formData.incoming}></input>
-            <label for="incoming"> Recieved gift</label><br></br>
+                <input onChange={handleChange} type="date" id="date" name="date"></input><br></br><br/>
+
+            <label>Gift status</label><br></br>
+            <label> Fulfilled</label>  
+            <input onChange={handleRadioChange} name="fulfilled" type="radio" value={"true"}></input>
+            <label> Unfulfilled</label>  
+            <input onChange={handleRadioChange} name="fulfilled" type="radio" value={"false"}></input><br/><br/>
+
+            <label>Incoming or outgoing gift?</label><br></br>
+            <label> Incoming gift</label>    
+            <input onChange={handleRadioChange} name="incoming" type="radio" value={"true"}></input>
+            <label> Outgoing gift</label>
+            <input onChange={handleRadioChange} name="incoming" type="radio" value={"false"}></input><br/><br/>
             
-            <label>Person gift is being exchanged with</label>
+            <label>Person gift is to/from</label>
               <select name="person_id" value={formData.person_id} onChange={handleChange}>
                 <option value="">select person</option>
                 {optionDropdown()}
