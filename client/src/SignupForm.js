@@ -1,18 +1,10 @@
 import React, { useState } from 'react'
 import { v4 as uuid } from "uuid";
 
-function SignupForm({onLogin}) {
+function SignupForm({onLogin, onFormSelect}) {
    
-    // dispatch would either cause a new user to be created and return the user or return errors
-
-    // const [name, setName] = useState("")
-    // const [username, setUsername] = useState("")
-    // const [password, setPassword] = useState("")
-    // const [passwordConfirmation, setPasswordConfirmation] = useState("")
     const [errors, setErrors] = useState([])
-    const [successfulMessage, setSuccessfulMessage] = useState("")
-    // const [currentUser, setCurrentUser] = useContext(CurrentUserContext)
-    
+    const [successfulMessage, setSuccessfulMessage] = useState("")    
     const [formData, setFormData] = useState({
         name: "",
         username: "",
@@ -22,6 +14,9 @@ function SignupForm({onLogin}) {
 
     console.log("signup form data: ", formData)
 
+    function handleClick() {
+        onFormSelect(true)
+    }
 
     function handleChange(event) {
         setFormData({ ...formData, [event.target.name]: event.target.value })
@@ -59,19 +54,31 @@ function SignupForm({onLogin}) {
     const renderErrors = errors.map( (error) => <p key={uuid()} style={{color: "red"}}>{error}</p> )
     
     return (
-        <div>
+        <div className="bdy">
+        <div className="center">
+            <h1>Sign-up</h1>
             <form onSubmit={handleSubmit}>
-                <label>Name:</label><input onChange={handleChange} name="name" type="text" value={formData.name}></input><br></br>
-                <label>Username:</label><input onChange={handleChange} name="username" type="text" value={formData.username}></input><br></br>
-                <label>Password:</label><input onChange={handleChange} name="password" type="password" value={formData.password}></input><br></br>
-                <label>Confirm password:</label><input onChange={handleChange} name="password_confirmation" type="password" value={formData.password_confirmation}></input><br></br>
+                <div className="input_field">
+                    <input onChange={handleChange} name="name" type="text" value={formData.name}></input><span></span><label>Name:</label>
+                </div>
+                <div className="input_field">
+                    <input onChange={handleChange} name="username" type="text" value={formData.username}></input><span></span><label>Username:</label>
+                </div>
+                <div className="input_field">
+                    <input onChange={handleChange} name="password" type="password" value={formData.password}></input><span></span><label>Password:</label>
+                </div>
+                <div className="input_field">
+                   <input onChange={handleChange} name="password_confirmation" type="password" value={formData.password_confirmation}></input><span></span><label>Confirm password:</label> 
+                </div>
                 
-               <button>Sign up</button>
+               <button className="key">Sign up</button>
             </form>
             {successfulMessage ? <p>{successfulMessage}</p> : <></>}
             {errors ? renderErrors : <></> }
+            <p>Already have an account?</p>
+                    <button className="key2" onClick={handleClick}>Log in</button>
         </div>
- 
+        </div>
  
  
  )

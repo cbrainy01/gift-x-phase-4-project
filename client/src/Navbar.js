@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from "react-router-dom"
 import "./styling/nav.css"
 import { IoMenu } from "react-icons/io5";
+import { IoGift } from "react-icons/io5";
 
 function Navbar({ currentUser, onLogout }) {
     
@@ -18,15 +19,13 @@ function Navbar({ currentUser, onLogout }) {
         <nav>
             <input type="checkbox" id="check"/>
                 <label for="check" className="checkbtn">
-                    <IoMenu /*className="bars"*/ />
+                    <IoMenu/>
+                    
                 </label>
-            <label > <Link className="logo" to="/">Gift-X</Link> </label>
+            <label > <Link className="logo" to="/">Gift-X</Link> <IoGift/> </label>
          <ul>
             <li>
-                <Link className="link" to="/"> Home</Link>
-            </li>
-            <li>
-                <Link className="link" to="/gifts"> Gifts</Link>
+                <Link className="link" to="/"> Gifts</Link>
             </li>
             <li>
                 <Link className="link" to="/people"> People</Link>

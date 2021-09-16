@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { v4 as uuid } from "uuid";
+import "./styling/loginform.css"
 
-function LoginForm({onLogin}) {
+function LoginForm({onLogin, onFormSelect}) {
     
     // const [currentUser, setCurrentUser] = useContext(CurrentUserContext)
     const [errors, setErrors] = useState([])
@@ -14,6 +15,10 @@ function LoginForm({onLogin}) {
 
     function handleChange(event) {
         setFormData({ ...formData, [event.target.name]: event.target.value })
+    }
+
+    function handleClick(event) {
+        onFormSelect(false)
     }
 
     function handleSubmit(event) {
@@ -43,17 +48,26 @@ function LoginForm({onLogin}) {
 
 
     return (
-        <div>
+        <div className="bdy">
+        <div className="center">
+            <h1>Login</h1>
             <form onSubmit={handleSubmit}>
-                <label>Username:</label><input onChange={handleChange} name="username" type="text" value={formData.username} ></input><br></br>
-                <label>Password:</label><input onChange={handleChange} name="password" type="password" value={formData.password} ></input><br></br>
+                <div className="input_field">
+                    <input onChange={handleChange} name="username" type="text" value={formData.username} ></input><span></span><label>Username:</label>
+                </div>
+                <div className="input_field">
+                     <input onChange={handleChange} name="password" type="password" value={formData.password} ></input><span></span><label>Password:</label>
+                </div>
                
-                <button>Login</button>
+           
+                <button className="key">Login</button>
             </form>
 
             {errors ? renderErrors : <></> }
+            
+                    <p>New to Gift-X?</p><button className="key2" onClick={handleClick}>Sign up</button>
         </div>
- 
+        </div>
  
  
  )

@@ -1,9 +1,6 @@
 import { useState, useEffect } from 'react';
-// import { CurrentUserContext } from "./context/currentUser"
-// import Navbar from "./navbar/Navbar"
 import { Route, Switch } from 'react-router-dom';
 import Gate from './Gate';
-import Home from './Home';
 import Navbar from './Navbar';
 import Gifts from './Gifts';
 import People from './People';
@@ -186,7 +183,7 @@ function App() {
           <Gate onLogin={handleLogin}/>
         </Route>
         <Route exact path="/"> 
-          <Home/>
+        <Gifts gifts={userGifts} people={userPeople} userId={currentUser.id} onGiftCreate={handleCreateGift} onGiftEdit={handleGiftEdit} onGiftDelete={handleGiftDelete}/>  
         </Route>
       </Switch>
        

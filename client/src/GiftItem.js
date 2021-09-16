@@ -45,8 +45,8 @@ function GiftItem({gift, onGiftEdit, onGiftDelete}) {
                 <input onChange={handleChange} type="date" id="date" name="date" value={giftEditFormData.date}></input><br></br>
         </>)    
         : 
-        (<><h3 style={{color: "lightgreen"}} >{gift.name}</h3>
-                <p>Recieved from {gift.person.name} on {gift.date}</p></>)
+        (<><h3 style={{color: "blue"}} >{gift.name}</h3>
+                <p className="text">Recieved from {gift.person.name} on {gift.date}</p></>)
         }
                 
             </div>
@@ -65,10 +65,10 @@ function GiftItem({gift, onGiftEdit, onGiftDelete}) {
                 <input onChange={handleChange} type="date" id="date" name="date" value={giftEditFormData.date}></input><br></br>
                 </>) 
                 :
-                (<><h3 style={{color: "lightgreen"}} >{gift.name}</h3>
+                (<div className="text"><h3 style={{color: "blue"}} >{gift.name}</h3>
             <p>To: {gift.person.name}</p>
             <p>Date of exchange: {gift.date}</p>
-            <p>{gift.fulfilled? "Gift has been fulfilled": "Gift has not been fulfilled" }</p></>)}
+            <p>{gift.fulfilled? "Gift has been fulfilled": "Gift has not been fulfilled" }</p></div>)}
             
             
             </div>)
@@ -76,11 +76,11 @@ function GiftItem({gift, onGiftEdit, onGiftDelete}) {
     }
 
     return (
-        <div>
+        <div className="li">
             {renderGift()}
 
-            {giftEditing !== null ? (<button onClick={handleClick}>Submit edit</button> ) : (<button onClick={ () => setGiftEditing(gift.id) }>Edit gift info</button> )}
-            <button onClick={handleClickDelete}>delete gift</button>
+            {giftEditing !== null ? (<button className="button1" onClick={handleClick}>Submit edit</button> ) : (<button className="button1" onClick={ () => setGiftEditing(gift.id) }>Edit gift info</button> )}
+            <button className="button2" onClick={handleClickDelete}>delete gift</button>
         </div>
     )
 }

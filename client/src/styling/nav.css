@@ -10,13 +10,14 @@
 }
 
 nav{
-    background: #0082e6;
+    background: #ff3772;
+    /* background: #0082e6; */
     height: 80px;
     width: 100%;
 }
 
 label .logo{
-    color: red;
+    color: #0082e6;
     font-size: 55px;
     line-height: 80px;
     padding: 0 100px;
@@ -49,7 +50,7 @@ nav ul li .link{
 
 .checkbtn{
     font-size: 30px;
-    color: red;
+    color: #0082e6;
     float: right;
     line-height: 80px;
     margin-right: 40px;

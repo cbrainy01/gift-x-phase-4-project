@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { v4 as uuid } from "uuid"
 import GiftItem from './GiftItem'
+import "./styling/gifts.css"
+import "./styling/createpeople.css"
 
 function Gifts({gifts, people, userId, onGiftCreate, onGiftEdit, onGiftDelete}) {
     
@@ -64,14 +66,13 @@ function Gifts({gifts, people, userId, onGiftCreate, onGiftEdit, onGiftDelete}) 
     console.log("GIFT FORM DATA: ", formData)
     return (
         <div>
+            <div className="body">
             <h1>Gifts</h1>
-
-            {/* <label></label><br></br> */}
             <label> Show all gifts</label>  
             <input onChange={handleFilter} name="filter" type="radio" value={"all"}></input><br/>
-            <label> Show all recieved gifts</label>  
+            <label> Show only recieved gifts</label>  
             <input onChange={handleFilter} name="filter" type="radio" value={"incoming only"}></input><br/>
-            <label> Show all outgoing gifts</label>  
+            <label> Show only outgoing gifts</label>  
             <input onChange={handleFilter} name="filter" type="radio" value={"outgoing only"}></input><br/><br/>
 
             <h2>New Gift Entry</h2>
@@ -79,7 +80,7 @@ function Gifts({gifts, people, userId, onGiftCreate, onGiftEdit, onGiftDelete}) 
             <label>Gift name: </label>
                 <input onChange={handleChange} id="name" name="name" type="text" value={formData.name}></input><br></br>
             <label >Rating (between 0 and 10):</label>
-                <input onChange={handleChange} type="range" id="rating" name="rating" min="0" max="10" value={formData.rating}></input><p>{formData.rating}</p><br></br>
+                <input className="rating" onChange={handleChange} type="range" id="rating" name="rating" min="0" max="10" value={formData.rating}></input><p>{formData.rating}</p><br></br>
             <label >Date of exchange/potential date of exchange</label>
                 <input onChange={handleChange} type="date" id="date" name="date"></input><br></br><br/>
 
@@ -100,9 +101,10 @@ function Gifts({gifts, people, userId, onGiftCreate, onGiftEdit, onGiftDelete}) 
                 <option value="">select person</option>
                 {optionDropdown()}
             </select>
-            <br></br><button>Add gift</button>
+            <br></br><button className="add_button">Add gift</button>
             </form>
-            {renderGifts}
+            <div className="ul">{renderGifts}</div>
+            </div>
         </div>
     )
 }

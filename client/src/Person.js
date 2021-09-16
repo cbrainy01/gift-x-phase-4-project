@@ -27,43 +27,38 @@ function Person({person, currentUser, onPersonEdit, onPersonDelete}) {
 
     const giftsUserGaveOut = person.gifts.filter( (gift) => gift.incoming === true )
     const giftsRecieved = person.gifts.filter( (gift) => gift.incoming === false && gift.fulfilled === true)
-    const renderGaveOut = giftsUserGaveOut.map( (gift) => <p key={uuid()}>name: {gift.name}, date : {gift.date}, you rated the gift: {gift.rating}</p> )
+    const renderGaveOut = giftsUserGaveOut.map( (gift) => <p key={uuid()}>- {gift.name}, date : {gift.date}, you rated the gift: {gift.rating}</p> )
     const renderRecieved = giftsRecieved.map( (gift) => <p key={uuid()}>name: {gift.name}, date : {gift.date}</p> )
-    
-    console.log("given to user: ", giftsUserGaveOut)
-    console.log("given recieved from user: ", giftsRecieved)
-    console.log("EDITS: ", personEditFormData)
 
     return (
-        <div>
-
+        <div className="li">
+            {person.image ? (<img src={person.image}/>) : (<img width="150" height="200" src="https://glenwood.org/wp-content/uploads/2019/12/blank-profile-picture-973460_1280-300x300.jpg"/>) }
                  {personEditing === person.id ? 
                  (
-                 <>
-                    <p>Input fields for edit</p>
+                 <div className="inputs">
                     <label>Person name: </label>
                 <input onChange={handleChange} id="name" name="name" type="text" value={personEditFormData.name}></input><br></br>
                 <label>Person image_url: </label>
                 <input onChange={handleChange} id="image" name="image" type="text" value={personEditFormData.image}></input><br></br>
                 <label>Info about person: </label>
                 <textarea onChange={handleChange} id="info" name="info" rows="4" cols="50" value={personEditFormData.info}> </textarea><br></br>
-                 </>
+                 </div>
                 ) 
                  :
                  (
-                 <>
+                 <div className="text">
                     <h3 style={{color: "blue"}}> {person.name}</h3>
-                    <p>Helpful insights: {person.info}</p>
-                    <h4>Gifts recieved from {person.name}</h4>
-                    {renderGaveOut} 
-                    <h4>Gifts you gave {person.name}</h4>
-                 </>) 
+                    <p>Helpful insights: {person.info}</p><br/>
+                    <h4>Gifts recieved from {person.name}: </h4>
+                    {renderGaveOut}
+                    <br/><h4>Gifts you gave {person.name}: </h4>
+                 </div>) 
                  }
 
-                {personEditing !== null ? (<button onClick={handleClick}>Submit edit</button> ) : (<button onClick={ () => setPersonEditing(person.id) }>Edit person info</button> )}
+                {personEditing !== null ? (<button className="button1" onClick={handleClick}>Submit edit</button> ) : (<button className="button1" onClick={ () => setPersonEditing(person.id) }>Edit person info</button> )}
                  
                 
-                <button onClick={handleClickDelete}>Delete person</button>
+                <button className="button2" onClick={handleClickDelete}>Delete person</button>
                  
         </div>
     )

@@ -6,21 +6,21 @@ function Gate({onLogin}) {
     const [showLogin, setShowLogin] = useState(true);
     // import user variable
 
+    function handleFormSelection(boolean) {
+        setShowLogin(boolean)
+    }
+
     return (
         <div>
             {showLogin ? (
                 <>
-                    <LoginForm onLogin={onLogin}/>
-                    <p>New to Gift-X?</p>
-                    <button onClick={ () => setShowLogin(false) }>Sign up</button>
+                    <LoginForm onLogin={onLogin} onFormSelect={handleFormSelection}/> 
                 </>
             ) 
             : 
             (
                 <>
-                    <SignupForm onLogin={onLogin}/>
-                    <p>Already have an account?</p>
-                    <button onClick={ () => setShowLogin(true) }>Log in</button>
+                    <SignupForm onLogin={onLogin} onFormSelect={handleFormSelection}/>
                 </>
             ) }
         </div>
