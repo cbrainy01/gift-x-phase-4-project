@@ -5,5 +5,5 @@ class UserSerializer < ActiveModel::Serializer
   # has_many :people, through: :gifts
 
 # include gifts in attributes
-  attributes :id, :username, :image, :name
+  attributes :id, :username
 end

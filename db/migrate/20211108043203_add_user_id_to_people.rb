@@ -3,3 +3,5 @@ class AddUserIdToPeople < ActiveRecord::Migration[6.1]
     add_column :people, :user_id, :integer
   end
 end
+
+
