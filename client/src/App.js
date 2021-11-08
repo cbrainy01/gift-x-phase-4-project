@@ -166,8 +166,10 @@ function App() {
   } )
  }
 
+ 
+
   console.log("USER GIFTS: ", userGifts)
-  console.log("USER People: ", userPeople)
+  console.log("***USER People: ", userPeople)
 
   return (
     <>

@@ -28,13 +28,28 @@ function People({currentUser, people, onAddPerson, onPersonEdit, onPersonDelete}
         })
     }
 
-    const renderPeople = people.map( (person) => <Person key={uuid()} person={person} currentUser={currentUser} onPersonEdit={onPersonEdit} onPersonDelete={onPersonDelete}/> )
+    // function handleClick() {
+    //     onSort()
+    // }
+
+    function sortPeople() {
+        return people.sort( (personA, personB) => {
+          if(personA.gifts.length > personB.gifts.length) { return 1}
+          else if(personA.gifts.length < personB.gifts.length) { return -1}
+          else {return 0}
+        } )
+    
+        // setUserPeople(sorted)
+     }
+
+    const renderPeople = sortPeople().map( (person) => <Person key={uuid()} person={person} currentUser={currentUser} onPersonEdit={onPersonEdit} onPersonDelete={onPersonDelete}/> )
     
     console.log("NEW PERSON IFO: ", formData)
     return (
         <div>
             <div className="body">
                 <h1>People</h1>
+                {/* <button onClick={sortPeople}>sort by gifts</button> */}
                 <h3>Add person</h3>
                 <form onSubmit={handleSubmit}>
                     <label>Person name: </label>
@@ -53,3 +68,4 @@ function People({currentUser, people, onAddPerson, onPersonEdit, onPersonDelete}
 }
 
 export default People
+

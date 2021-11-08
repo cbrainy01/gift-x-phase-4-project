@@ -28,11 +28,11 @@ function Person({person, currentUser, onPersonEdit, onPersonDelete}) {
     const giftsUserGaveOut = person.gifts.filter( (gift) => gift.incoming === true )
     const giftsRecieved = person.gifts.filter( (gift) => gift.incoming === false && gift.fulfilled === true)
     const renderGaveOut = giftsUserGaveOut.map( (gift) => <p key={uuid()}>- {gift.name}, date : {gift.date}, you rated the gift: {gift.rating}</p> )
-    const renderRecieved = giftsRecieved.map( (gift) => <p key={uuid()}>name: {gift.name}, date : {gift.date}</p> )
+    const renderRecieved = giftsRecieved.map( (gift) => <p key={uuid()}>- {gift.name}, date : {gift.date}</p> )
 
     return (
         <div className="li">
-            {person.image ? (<img src={person.image}/>) : (<img width="150" height="200" src="https://glenwood.org/wp-content/uploads/2019/12/blank-profile-picture-973460_1280-300x300.jpg"/>) }
+            {person.image ? (<img src={person.image} alt={person.name}/>) : (<img width="150" height="200" alt="" src="https://glenwood.org/wp-content/uploads/2019/12/blank-profile-picture-973460_1280-300x300.jpg"/>) }
                  {personEditing === person.id ? 
                  (
                  <div className="inputs">
@@ -51,7 +51,7 @@ function Person({person, currentUser, onPersonEdit, onPersonDelete}) {
                     <p>Helpful insights: {person.info}</p><br/>
                     <h4>Gifts recieved from {person.name}: </h4>
                     {renderGaveOut}
-                    <br/><h4>Gifts you gave {person.name}: </h4>
+                    <br/><h4>Gifts you gave {person.name}: {renderRecieved}</h4>
                  </div>) 
                  }
 

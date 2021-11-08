@@ -30,6 +30,7 @@ function LoginForm({onLogin, onFormSelect}) {
             body: JSON.stringify(formData)
         })
         .then( response => {
+            console.log("resp: ", response)
             if(response.ok) {
                 // set current user to what came from fetch(authenticated user) and set errors back to empty array
                 response.json().then( (rData) => {/**setFormData({
